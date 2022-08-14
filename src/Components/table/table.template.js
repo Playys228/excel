@@ -3,33 +3,17 @@ const CODES = {
   Z: 90,
 }
 
-function toCell(indexRow, indexCol) {
+function toCell(_, index) {
   return `
- <div class="cell" data-indexRow="${indexRow}"
-  data-type="cell"
-  data-indexCol="${indexCol}" data-id="${indexRow}:${indexCol}" contenteditable>
+  <div class="cell" data-indexCol="${index}" contenteditable>
+    
   </div>`
 }
-
-// realize then more elegant
-
-// function toCell(row) {
-//   return function(_, col) {
-//     return `
-//     <div
-//       class="cell"
-//       contenteditable
-//       data-col="${col}"
-//       data-id="${row}:${col}"
-//     ></div>
-//     `
-//   }
-// }
 
 function toColumn(col, index) {
   return `
   <div class="column" data-type="resizable" data-indexcol="${index}">
-    ${col} 
+    ${col}
     <div class="col-resize" data-resize="col"></div>
   </div>
   `
@@ -61,10 +45,10 @@ export function createTable(rowsCount = 15) {
       .map(toColumn)
       .join('')
 
-  // const cells = new Array(colsCount)
-  //     .fill('')
-  //     .map(toCell())
-  //     .join('')
+  const cells = new Array(colsCount)
+      .fill('')
+      .map(toCell)
+      .join('')
 
   // __________________________________________ my awful realization
   // const cols = []
@@ -77,13 +61,8 @@ export function createTable(rowsCount = 15) {
 
   rows.push(createRow('', cols))
 
-  for (let row = 0; row < rowsCount; row++) {
-    const cells = new Array(colsCount)
-        .fill('')
-        .map((_, col) => toCell(row, col))
-        .join('')
-
-    rows.push(createRow(row+1, cells))
+  for (let i = 0; i < rowsCount; i++) {
+    rows.push(createRow(i+1, cells))
   }
 
   return rows.join('')

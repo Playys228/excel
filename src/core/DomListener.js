@@ -9,11 +9,6 @@ export class DomListener {
     this.realizedListeners = []
     // massive of listeners
     this.listeners = listeners
-    this.prepare()
-  }
-
-  prepare() {
-
   }
 
   // adding Listeners
@@ -36,7 +31,7 @@ export class DomListener {
   removeDOMListeners() {
     console.log('removing DOMlistener')
     this.realizedListeners.forEach( ( {listener, realizedListener} ) => {
-      this.$root.off(listener, realizedListener)
+      this.$root.off(listener, realizedListener )
     })
   }
 }

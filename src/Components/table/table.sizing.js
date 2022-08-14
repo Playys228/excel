@@ -3,6 +3,7 @@ import { $ } from "../../core/DOM";
 export function resizingRealization($root, event) {
   const $resizer = $(event.target)
   const type = $resizer.data.resize
+  console.log($resizer)
   if (type) {
     const $parent = $resizer.closest('[data-type="resizable"]')
     const index = $parent.data.indexcol
@@ -30,7 +31,7 @@ export function resizingRealization($root, event) {
           $resizer.css({
             right: 0,
             opacity: 0,
-            bottom: 0,
+            // height: 0,
           })
           document.onmouseup = null
           document.onmousemove = null
